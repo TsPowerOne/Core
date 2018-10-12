@@ -22,4 +22,18 @@ declare let replaceAll: (str: string, find: string, replace: string) => string;
  * @returns string escaped
  */
 declare let escapeTag: (s: string) => string;
-export { empty, htmlParse, replaceAll, escapeTag };
+/**
+ *
+ * @param s any log s
+ * @param label string to identify log
+ * @param time stamp datetime of log
+ */
+declare let log: (s: any, label?: string, time?: boolean) => void;
+/**
+ *
+ * @param s any error s
+ * @param label string to identify log
+ * @param time stamp datetime of log
+ */
+declare let err: (s: any, label?: string, time?: boolean) => void;
+export { empty, htmlParse, replaceAll, escapeTag, err, log };

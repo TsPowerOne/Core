@@ -39,4 +39,23 @@ let escapeTag = (s: string):string=> {
     return s;
 }
 
-export{ empty, htmlParse, replaceAll, escapeTag}
+/**
+ * 
+ * @param s any log s
+ * @param label string to identify log
+ * @param time stamp datetime of log
+ */
+let log = (s:any, label:string = "", time:boolean = false):void=>{
+    console.log(`${(label!="")?label:"info"}->${(time)?" " + new Date():""}`, s);
+}
+/**
+ * 
+ * @param s any error s
+ * @param label string to identify log
+ * @param time stamp datetime of log
+ */
+let err = (s:any, label:string = "", time:boolean = false):void=>{
+    console.log(`${(label!="")?label:"err"}->${(time)?" " + new Date():""}`, s);
+}
+
+export{ empty, htmlParse, replaceAll, escapeTag, err, log}
