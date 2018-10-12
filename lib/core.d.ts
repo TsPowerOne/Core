@@ -69,4 +69,9 @@ declare let getLocal: (name: string) => any;
  * @param name item name
  */
 declare let removeLocal: (name: string) => void;
-export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal };
+/**
+ * transform a collection to an array
+ * @param collection collection of HTMLElement
+ */
+declare let collToArray: (collection: HTMLAllCollection) => any[];
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray };

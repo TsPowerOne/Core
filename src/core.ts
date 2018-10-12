@@ -122,7 +122,17 @@ let removeLocal = (name: string): void => {
     localStorage.removeItem(name);
 }
 
+/**
+ * transform a collection to an array
+ * @param collection collection of HTMLElement
+ */
+let collToArray = (collection:HTMLAllCollection):Array<any>=>{
+    let res = Array.prototype.slice.call( collection, 0 );
+    return res;
+}
+
 export{ empty, htmlParse, replaceAll, escapeTag, err, log, 
         setCookie, getCookie, removeCookie, 
-        setLocal, getLocal, removeLocal
+        setLocal, getLocal, removeLocal,
+        collToArray
     }
