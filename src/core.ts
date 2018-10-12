@@ -126,7 +126,7 @@ let removeLocal = (name: string): void => {
  * transform a collection to an array
  * @param collection collection of HTMLElement
  */
-let collToArray = (collection:HTMLAllCollection):Array<any>=>{
+let collToArray = (collection:NodeListOf<Element>):Array<any>=>{
     let res = Array.prototype.slice.call( collection, 0 );
     return res;
 }

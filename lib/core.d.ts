@@ -73,5 +73,5 @@ declare let removeLocal: (name: string) => void;
  * transform a collection to an array
  * @param collection collection of HTMLElement
  */
-declare let collToArray: (collection: HTMLAllCollection) => any[];
+declare let collToArray: (collection: NodeListOf<Element>) => any[];
 export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray };
