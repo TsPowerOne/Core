@@ -36,4 +36,37 @@ declare let log: (s: any, label?: string, time?: boolean) => void;
  * @param time stamp datetime of log
  */
 declare let err: (s: any, label?: string, time?: boolean) => void;
-export { empty, htmlParse, replaceAll, escapeTag, err, log };
+/**
+ * set cookie
+ * @param name cookie name
+ * @param value cookie value
+ * @param days days expire
+ */
+declare let setCookie: (name: string, value: any, days?: any) => void;
+/**
+ * get saved cookie
+ * @param name cookie name
+ */
+declare let getCookie: (name: string) => any;
+/**
+ * erase cookie
+ * @param name cookie name
+ */
+declare let removeCookie: (name: string) => void;
+/**
+ * set item in local storage
+ * @param name item name
+ * @param value item value
+ */
+declare let setLocal: (name: string, value: any) => void;
+/**
+ * get item value
+ * @param name item name
+ */
+declare let getLocal: (name: string) => any;
+/**
+ * remove item from local storage
+ * @param name item name
+ */
+declare let removeLocal: (name: string) => void;
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal };

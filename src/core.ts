@@ -93,7 +93,7 @@ return null;
  * erase cookie
  * @param name cookie name
  */
-let eraseCookie = (name:string)=> {
+let removeCookie = (name:string)=> {
     document.cookie = name + '=; Max-Age=-99999999;';
 }
 
@@ -122,4 +122,7 @@ let removeLocal = (name: string): void => {
     localStorage.removeItem(name);
 }
 
-export{ empty, htmlParse, replaceAll, escapeTag, err, log}
+export{ empty, htmlParse, replaceAll, escapeTag, err, log, 
+        setCookie, getCookie, removeCookie, 
+        setLocal, getLocal, removeLocal
+    }
