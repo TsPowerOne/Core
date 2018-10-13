@@ -131,8 +131,15 @@ let collToArray = (collection:NodeListOf<Element>):Array<any>=>{
     return res;
 }
 
+/**
+ * clear local storage
+ */
+let emptyLocal = ()=>{
+    localStorage.clear();
+}
+
 export{ empty, htmlParse, replaceAll, escapeTag, err, log, 
         setCookie, getCookie, removeCookie, 
         setLocal, getLocal, removeLocal,
-        collToArray
+        collToArray, emptyLocal
     }

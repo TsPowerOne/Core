@@ -74,4 +74,8 @@ declare let removeLocal: (name: string) => void;
  * @param collection collection of HTMLElement
  */
 declare let collToArray: (collection: NodeListOf<Element>) => any[];
-export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray };
+/**
+ * clear local storage
+ */
+declare let emptyLocal: () => void;
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal };
