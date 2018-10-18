@@ -78,4 +78,6 @@ declare let collToArray: (collection: NodeListOf<Element>) => any[];
  * clear local storage
  */
 declare let emptyLocal: () => void;
-export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal };
+declare let unique: (array: any[]) => any[];
+declare let uniqueObj: (array: object[], objProperty: string) => object[];
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj };

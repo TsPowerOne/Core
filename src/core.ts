@@ -138,8 +138,15 @@ let emptyLocal = ()=>{
     localStorage.clear();
 }
 
+let unique = (array:Array<any>):Array<any>=>{
+    return array.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+}
+let uniqueObj = (array:Array<object>, objProperty:string):Array<object> =>{
+    return array.filter(function(item, i, arr){ return arr.map(e=>e[objProperty]).indexOf(item[objProperty]) === i});
+}
 export{ empty, htmlParse, replaceAll, escapeTag, err, log, 
         setCookie, getCookie, removeCookie, 
         setLocal, getLocal, removeLocal,
-        collToArray, emptyLocal
+        collToArray, emptyLocal,
+        unique, uniqueObj
     }
