@@ -79,5 +79,5 @@ declare let collToArray: (collection: NodeListOf<Element>) => any[];
  */
 declare let emptyLocal: () => void;
 declare let unique: (array: any[]) => any[];
-declare let uniqueObj: (array: object[], objProperty: string) => object[];
+declare let uniqueObj: (array: object[], objProperty: string) => any[];
 export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj };
