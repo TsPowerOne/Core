@@ -127,7 +127,9 @@ declare class InputData {
     enabled: boolean;
     checked: boolean;
     isValid: boolean;
-    constructor(name: string, id: string, value?: string, enabled?: boolean, checked?: boolean, isValid?: boolean);
+    index: string;
+    display: string;
+    constructor(name: string, id: string, value?: string, enabled?: boolean, checked?: boolean, isValid?: boolean, index?: string, display?: string);
 }
 import { Subject, Observable } from 'rxjs';
 declare class InputElement extends CoreElement implements IInputElement, IInputEvent {
