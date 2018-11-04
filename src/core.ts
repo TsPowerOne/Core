@@ -275,11 +275,15 @@ class InputData{
     id:string;
     value:string;
     enabled:boolean;
-    constructor(name:string, id:string, value:string, enabled:boolean){
+    checked:boolean;
+    isValid:boolean;
+    constructor(name:string, id:string, value?:string, enabled?:boolean, checked?:boolean, isValid?:boolean){
         this.name = name;
         this.id = id;
         this.value = value;
         this.enabled = enabled;
+        this.checked = checked;
+        this.isValid = isValid;
     }
 }
 import {Subject, Observable} from 'rxjs';
