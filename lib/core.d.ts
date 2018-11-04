@@ -127,20 +127,20 @@ declare class InputData {
     enabled: boolean;
     constructor(name: string, id: string, value: string, enabled: boolean);
 }
-import { Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 declare class InputElement extends CoreElement implements IInputElement, IInputEvent {
-    private root;
-    private Name;
-    private Enabled;
-    private Type;
+    protected root: HTMLElement;
+    protected Name: string;
+    protected Enabled: boolean;
+    protected Type: string;
     node: HTMLInputElement;
-    private _value;
-    private _enabled;
-    private changed;
-    private clicked;
-    private enabled;
-    private disabled;
-    private inputed;
+    protected _value: any;
+    protected _enabled: boolean;
+    protected changed: Subject<InputData>;
+    protected clicked: Subject<InputData>;
+    protected enabled: Subject<InputData>;
+    protected disabled: Subject<InputData>;
+    protected inputed: Subject<InputData>;
     changed$: Observable<InputData>;
     clicked$: Observable<InputData>;
     enabled$: Observable<InputData>;

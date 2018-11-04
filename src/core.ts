@@ -286,14 +286,14 @@ import {Subject, Observable} from 'rxjs';
 class InputElement extends CoreElement implements IInputElement, IInputEvent{
 
     node:HTMLInputElement
-    private _value:any;
-    private _enabled:boolean;
+    protected _value:any;
+    protected _enabled:boolean;
 
-    private changed = new Subject<InputData>();
-    private clicked = new Subject<InputData>();
-    private enabled = new Subject<InputData>();
-    private disabled = new Subject<InputData>();
-    private inputed = new Subject<InputData>();
+    protected changed = new Subject<InputData>();
+    protected clicked = new Subject<InputData>();
+    protected enabled = new Subject<InputData>();
+    protected disabled = new Subject<InputData>();
+    protected inputed = new Subject<InputData>();
 
 
     public changed$ = this.changed.asObservable();
@@ -302,7 +302,7 @@ class InputElement extends CoreElement implements IInputElement, IInputEvent{
     public disabled$ = this.disabled.asObservable();
     public inputed$ = this.inputed.asObservable();
 
-    constructor(private root:HTMLElement, private Name:string,  private Enabled:boolean = true, private Type:string = "text", Id?:string, Class?:string, Style?:string){
+    constructor(protected root:HTMLElement, protected Name:string,  protected Enabled:boolean = true, protected Type:string = "text", Id?:string, Class?:string, Style?:string){
         super("input", Id, Class, Style);
         this.Init();
         this.Event();
