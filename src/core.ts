@@ -144,9 +144,118 @@ let unique = (array:Array<any>):Array<any>=>{
 let uniqueObj = (array:Array<object>, objProperty:string):Array<any> =>{
     return array.filter(function(item, i, arr){ return arr.map(e=>e[objProperty]).indexOf(item[objProperty]) === i});
 }
+
+
+class CoreElement{
+    public node:HTMLElement;
+    constructor(private type:string, private Id?:string, private Class?:string, private Style?:string){
+        this.init();
+
+    }
+
+    private init = ()=>{
+        try{
+            this.node = document.createElement(this.type);
+        }catch(error){
+            throw new Error("type creation error: " + error);
+        }
+        this.setAttr("id", this.Id);
+        this.setAttr("class", this.Class);
+        this.setAttr("style", this.Style);
+
+    }
+
+    public setId = (value:string):void=>{
+        this.setAttr("id", value);
+    }
+    public setClass = (value:string):void=>{
+        this.setAttr("class", value);
+    }
+    public setStyle = (value:string):void=>{
+        this.setAttr("style", value);
+    }
+
+    public id = (value:string):this=>{
+        if(value){
+            this.Id = value;
+            this.setAttr("id", value);
+        }
+        return this;
+    }
+    public class = (value:string):this=>{
+        if(value){
+            this.Class = value;
+            this.setAttr("class", value);
+        }
+        return this;
+    }
+    public style = (value:string):this=>{
+        if(value){
+            this.Style = value;
+            this.setAttr("style", value);
+        }
+        return this;
+    }
+
+    addClass =(value:string):void=>{
+        if(value)this.node.classList.add(value);
+    }
+    removeClass = (value:string):void=>{
+        if(value)this.node.classList.remove(value);
+    }
+    addStyle = (value:string):void=>{
+        if(value && this.isValidRule(value))this.addStyleRule(value);
+    }
+    removeStyle = (value:string):void=>{
+        if(value)this.removeStyleRule(value);
+    }
+
+
+
+
+
+    protected setAttr(name:string, value:string){
+        if(name!=null && value!=null){
+            this.node.setAttribute(name, value);
+        }
+    }
+    private isValidRule = (rule:string):boolean=>{
+        if(rule.indexOf(":") == -1)return false;
+        let r = rule.split(":")[0];
+        let v = rule.split(":")[1];
+        if(r==null || r=="" || v==null || v=="")return false;
+        return true;
+    }
+    private addStyleRule = (rule:string):void=>{
+        rule = rule.trim().replace(";","");
+        let style = this.node.getAttribute("style");
+        if(style==null || style==undefined)this.node.setAttribute("style", rule);
+        let r = rule.split(":")[0];
+        let v = rule.split(":")[1];
+
+        let rules:string[] = style.split(";");
+        let indexRuleIfPresent = rules.findIndex(e=>e.indexOf(r)!=-1);
+        if(indexRuleIfPresent != -1){
+            rules.splice(indexRuleIfPresent, 1);
+        }
+        rules.push(rule);
+        this.node.setAttribute("style", rules.join(";"))
+    }
+    private removeStyleRule = (rule:string):void=>{
+        rule.trim();
+        let style = this.node.getAttribute("style");
+        if(style.indexOf(rule)!=-1){
+            let rules = style.split(";");
+            let index = rules.findIndex(e=>e.indexOf(rule)!=-1);
+            rules.splice(index, 1);
+            this.node.setAttribute("style", rules.join(";"));
+
+        }
+    }
+}
 export{ empty, htmlParse, replaceAll, escapeTag, err, log, 
         setCookie, getCookie, removeCookie, 
         setLocal, getLocal, removeLocal,
         collToArray, emptyLocal,
-        unique, uniqueObj
+        unique, uniqueObj, CoreElement
     }

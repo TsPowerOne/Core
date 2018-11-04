@@ -80,4 +80,27 @@ declare let collToArray: (collection: NodeListOf<Element>) => any[];
 declare let emptyLocal: () => void;
 declare let unique: (array: any[]) => any[];
 declare let uniqueObj: (array: object[], objProperty: string) => any[];
-export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj };
+declare class CoreElement {
+    private type;
+    private Id?;
+    private Class?;
+    private Style?;
+    node: HTMLElement;
+    constructor(type: string, Id?: string, Class?: string, Style?: string);
+    private init;
+    setId: (value: string) => void;
+    setClass: (value: string) => void;
+    setStyle: (value: string) => void;
+    id: (value: string) => this;
+    class: (value: string) => this;
+    style: (value: string) => this;
+    addClass: (value: string) => void;
+    removeClass: (value: string) => void;
+    addStyle: (value: string) => void;
+    removeStyle: (value: string) => void;
+    protected setAttr(name: string, value: string): void;
+    private isValidRule;
+    private addStyleRule;
+    private removeStyleRule;
+}
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj, CoreElement };
