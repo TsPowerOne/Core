@@ -316,6 +316,7 @@ class InputElement extends CoreElement implements IInputElement, IInputEvent{
         this.setAttr("name", this.Name);
         this.setAttr("type", this.Type);
         if(!this.Enabled)this.setAttr("disabled", "");
+        this._enabled = this.Enabled;
         this.root.appendChild(this.node);
     }
     Event = () =>{
