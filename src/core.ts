@@ -148,21 +148,20 @@ let uniqueObj = (array:Array<object>, objProperty:string):Array<any> =>{
 
 class CoreElement{
     public node:HTMLElement;
-    constructor(private type:string, private Id?:string, private Class?:string, private Style?:string){
+    constructor(private elementName:string, protected Id?:string, protected Class?:string, protected Style?:string){
         this.init();
 
     }
 
     private init = ()=>{
         try{
-            this.node = document.createElement(this.type);
+            this.node = document.createElement(this.elementName);
         }catch(error){
             throw new Error("type creation error: " + error);
         }
         this.setAttr("id", this.Id);
         this.setAttr("class", this.Class);
         this.setAttr("style", this.Style);
-
     }
 
     public setId = (value:string):void=>{
@@ -253,9 +252,135 @@ class CoreElement{
         }
     }
 }
+
+interface IInputEvent{
+    changed$:Observable<any>;
+    clicked$:Observable<any>;
+    enabled$:Observable<any>;
+    disabled$:Observable<any>;
+}
+interface IInputElement{
+    node:HTMLInputElement;
+    getValue:() => any;
+    setValue:(value:string) => void;
+    value:(value:string) => any;
+    isEnabled:() => boolean;
+    enable:() => any;
+    disable:() => any;
+    setType:(type:string) => void;
+    type:(type:string) => any;
+}
+class InputData{
+    name:string;
+    id:string;
+    value:string;
+    enabled:boolean;
+    constructor(name:string, id:string, value:string, enabled:boolean){
+        this.name = name;
+        this.id = id;
+        this.value = value;
+        this.enabled = enabled;
+    }
+}
+import {Subject, Observable} from 'rxjs';
+class InputElement extends CoreElement implements IInputElement, IInputEvent{
+
+    node:HTMLInputElement
+    private _value:any;
+    private _enabled:boolean;
+
+    private changed = new Subject<InputData>();
+    private clicked = new Subject<InputData>();
+    private enabled = new Subject<InputData>();
+    private disabled = new Subject<InputData>();
+    private inputed = new Subject<InputData>();
+
+
+    public changed$ = this.changed.asObservable();
+    public clicked$ = this.clicked.asObservable();
+    public enabled$ = this.enabled.asObservable();
+    public disabled$ = this.disabled.asObservable();
+    public inputed$ = this.inputed.asObservable();
+
+    constructor(private root:HTMLElement, private Name:string,  private Enabled:boolean = true, private Type:string = "text", Id?:string, Class?:string, Style?:string){
+        super("input", Id, Class, Style);
+        this.Init();
+        this.Event();
+    }
+
+    Init = () => {
+        this.setAttr("name", this.Name);
+        this.setAttr("type", this.Type);
+        if(!this.Enabled)this.setAttr("disabled", "");
+        this.root.appendChild(this.node);
+    }
+    Event = () =>{
+        this.node.addEventListener("click", ()=>{
+            let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+            this.clicked.next(data);
+        });
+        this.node.addEventListener("change", ()=>{
+            let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+            this.changed.next(data);           
+        });
+        this.node.addEventListener("input", (event)=>{
+            this._value = (event.target as HTMLInputElement).value;
+            let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+            this.inputed.next(data);
+        });
+    }
+    getValue = ():any => {
+        this._value = (this.node as HTMLInputElement).value;
+        return this._value;
+    }
+    setValue = (value:string):void => {
+        this._value = value;
+        (this.node as HTMLInputElement).value = value;
+        let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+        this.inputed.next(data);
+    }
+    value = (value:string):this => {
+        this._value = value;
+        (this.node as HTMLInputElement).value = value;
+        return this;
+    }
+    isEnabled = ():boolean => {
+        this._enabled = (this.node.getAttribute("disabled"))?false:true;
+        return this._enabled;
+    }
+    enable = ():this => {
+        if(!this._enabled)this.node.removeAttribute("disabled");
+        this._enabled = true;
+        let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+        this.enabled.next(data);
+        return this;
+    }
+    disable = ():this =>{
+        if(this._enabled)this.node.setAttribute("disabled", "");
+        this._enabled = false;
+        let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+        this.disabled.next(data);
+        return this;
+    }
+    setType = (value:string):void => {
+        if(value){
+            this.Type = value;
+            this.setAttr("type", this.Type);
+        }
+    }
+    type = (value:string):this => {
+        if(value){
+            this.Type = value;
+            this.setAttr("type", this.Type);
+        }
+        return this;
+    }
+}
+
 export{ empty, htmlParse, replaceAll, escapeTag, err, log, 
         setCookie, getCookie, removeCookie, 
         setLocal, getLocal, removeLocal,
         collToArray, emptyLocal,
-        unique, uniqueObj, CoreElement
+        unique, uniqueObj, CoreElement,
+        InputElement, InputData, IInputElement, IInputEvent
     }

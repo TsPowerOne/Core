@@ -81,12 +81,12 @@ declare let emptyLocal: () => void;
 declare let unique: (array: any[]) => any[];
 declare let uniqueObj: (array: object[], objProperty: string) => any[];
 declare class CoreElement {
-    private type;
-    private Id?;
-    private Class?;
-    private Style?;
+    private elementName;
+    protected Id?: string;
+    protected Class?: string;
+    protected Style?: string;
     node: HTMLElement;
-    constructor(type: string, Id?: string, Class?: string, Style?: string);
+    constructor(elementName: string, Id?: string, Class?: string, Style?: string);
     private init;
     setId: (value: string) => void;
     setClass: (value: string) => void;
@@ -103,4 +103,59 @@ declare class CoreElement {
     private addStyleRule;
     private removeStyleRule;
 }
-export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj, CoreElement };
+interface IInputEvent {
+    changed$: Observable<any>;
+    clicked$: Observable<any>;
+    enabled$: Observable<any>;
+    disabled$: Observable<any>;
+}
+interface IInputElement {
+    node: HTMLInputElement;
+    getValue: () => any;
+    setValue: (value: string) => void;
+    value: (value: string) => any;
+    isEnabled: () => boolean;
+    enable: () => any;
+    disable: () => any;
+    setType: (type: string) => void;
+    type: (type: string) => any;
+}
+declare class InputData {
+    name: string;
+    id: string;
+    value: string;
+    enabled: boolean;
+    constructor(name: string, id: string, value: string, enabled: boolean);
+}
+import { Observable } from 'rxjs';
+declare class InputElement extends CoreElement implements IInputElement, IInputEvent {
+    private root;
+    private Name;
+    private Enabled;
+    private Type;
+    node: HTMLInputElement;
+    private _value;
+    private _enabled;
+    private changed;
+    private clicked;
+    private enabled;
+    private disabled;
+    private inputed;
+    changed$: Observable<InputData>;
+    clicked$: Observable<InputData>;
+    enabled$: Observable<InputData>;
+    disabled$: Observable<InputData>;
+    inputed$: Observable<InputData>;
+    constructor(root: HTMLElement, Name: string, Enabled?: boolean, Type?: string, Id?: string, Class?: string, Style?: string);
+    Init: () => void;
+    Event: () => void;
+    getValue: () => any;
+    setValue: (value: string) => void;
+    value: (value: string) => this;
+    isEnabled: () => boolean;
+    enable: () => this;
+    disable: () => this;
+    setType: (value: string) => void;
+    type: (value: string) => this;
+}
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj, CoreElement, InputElement, InputData, IInputElement, IInputEvent };

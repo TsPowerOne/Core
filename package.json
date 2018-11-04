@@ -1,6 +1,6 @@
 {
   "name": "@tspower/core",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Core power tool",
   "main": "./lib/core.js",
   "types": "./lib/core.d.ts",
@@ -30,5 +30,8 @@
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
     "typedoc": "^0.13.0"
+  },
+  "dependencies": {
+    "rxjs": "^6.3.3"
   }
 }
