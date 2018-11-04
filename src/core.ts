@@ -292,6 +292,9 @@ class InputElement extends CoreElement implements IInputElement, IInputEvent{
     node:HTMLInputElement
     protected _value:any;
     protected _enabled:boolean;
+    private _disableChanged:boolean = false;
+    private _disableClicked:boolean = false;
+    private _disableInputed:boolean = false;
 
     protected changed = new Subject<InputData>();
     protected clicked = new Subject<InputData>();
@@ -321,17 +324,23 @@ class InputElement extends CoreElement implements IInputElement, IInputEvent{
     }
     Event = () =>{
         this.node.addEventListener("click", ()=>{
-            let data = new InputData(this.Name, this.Id, this._value, this._enabled);
-            this.clicked.next(data);
+            if(!this._disableClicked){
+                let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+                this.clicked.next(data);
+            }
         });
         this.node.addEventListener("change", ()=>{
-            let data = new InputData(this.Name, this.Id, this._value, this._enabled);
-            this.changed.next(data);           
+            if(!this._disableChanged){
+                let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+                this.changed.next(data); 
+            }          
         });
         this.node.addEventListener("input", (event)=>{
-            this._value = (event.target as HTMLInputElement).value;
-            let data = new InputData(this.Name, this.Id, this._value, this._enabled);
-            this.inputed.next(data);
+            if(!this._disableInputed){
+                this._value = (event.target as HTMLInputElement).value;
+                let data = new InputData(this.Name, this.Id, this._value, this._enabled);
+                this.inputed.next(data);
+            }
         });
     }
     getValue = ():any => {
@@ -379,6 +388,15 @@ class InputElement extends CoreElement implements IInputElement, IInputEvent{
             this.setAttr("type", this.Type);
         }
         return this;
+    }
+    DisableInputObservable = (value:boolean) =>  {
+        this._disableInputed = value;
+    }
+    DisableChangeObservable = (value:boolean) => {
+        this._disableChanged = value;
+    }
+    DisableClickObservable = (value:boolean) => {
+        this._disableClicked = value;
     }
 }
 

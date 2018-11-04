@@ -138,6 +138,9 @@ declare class InputElement extends CoreElement implements IInputElement, IInputE
     node: HTMLInputElement;
     protected _value: any;
     protected _enabled: boolean;
+    private _disableChanged;
+    private _disableClicked;
+    private _disableInputed;
     protected changed: Subject<InputData>;
     protected clicked: Subject<InputData>;
     protected enabled: Subject<InputData>;
@@ -159,5 +162,8 @@ declare class InputElement extends CoreElement implements IInputElement, IInputE
     disable: () => this;
     setType: (value: string) => void;
     type: (value: string) => this;
+    DisableInputObservable: (value: boolean) => void;
+    DisableChangeObservable: (value: boolean) => void;
+    DisableClickObservable: (value: boolean) => void;
 }
 export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj, CoreElement, InputElement, InputData, IInputElement, IInputEvent };
