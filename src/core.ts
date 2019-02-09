@@ -38,7 +38,7 @@ var htmlParse = (function() {
      * @param {String} elem A string containing html
      * @param {Document} context
      */
-    return function htmlParse(elem, context) {
+    return function htmlParse(elem:string, context?:any) {
         context = context || document;
 
         var tmp, tag, wrap, j,
