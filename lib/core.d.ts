@@ -3,7 +3,7 @@
  * @returns none - remove all childs of node
  */
 declare let empty: (node: HTMLElement) => void;
-declare var htmlParse: (elem: any, context: any) => any;
+declare var htmlParse: (elem: string, context?: any) => any;
 /**
  *
  * @param str origina string

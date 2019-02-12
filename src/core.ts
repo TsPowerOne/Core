@@ -12,7 +12,7 @@ let empty = (node:HTMLElement):void=> {
  * @param s string
  * @returns HTMLElement result of string parse
  */
-let htmlParseOld = (s:string):HTMLElement => {
+let htmlParseNT = (s:string):HTMLElement => {
     var node = document.createElement("div");
     node.innerHTML = s;
     return node.firstChild as HTMLElement;
@@ -464,5 +464,6 @@ export{ empty, htmlParse, replaceAll, escapeTag, err, log,
         setLocal, getLocal, removeLocal,
         collToArray, emptyLocal,
         unique, uniqueObj, CoreElement,
-        InputElement, InputData, IInputElement, IInputEvent
+        InputElement, InputData, IInputElement, IInputEvent,
+        htmlParseNT
     }
