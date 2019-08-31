@@ -3,6 +3,12 @@
  * @returns none - remove all childs of node
  */
 declare let empty: (node: HTMLElement) => void;
+/**
+ *
+ * @param s string
+ * @returns HTMLElement result of string parse
+ */
+declare let htmlParseNT: (s: string) => HTMLElement;
 declare var htmlParse: (elem: string, context?: any) => any;
 /**
  *
@@ -163,4 +169,4 @@ declare class InputElement extends CoreElement implements IInputElement, IInputE
     DisableChangeObservable: (value: boolean) => void;
     DisableClickObservable: (value: boolean) => void;
 }
-export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj, CoreElement, InputElement, InputData, IInputElement, IInputEvent };
+export { empty, htmlParse, replaceAll, escapeTag, err, log, setCookie, getCookie, removeCookie, setLocal, getLocal, removeLocal, collToArray, emptyLocal, unique, uniqueObj, CoreElement, InputElement, InputData, IInputElement, IInputEvent, htmlParseNT };

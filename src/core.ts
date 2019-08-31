@@ -74,7 +74,7 @@ var htmlParse = (function() {
 }());
 /**
  * 
- * @param str origina string 
+ * @param str original string 
  * @param find string to be find
  * @param replace string replace
  */
