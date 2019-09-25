@@ -199,14 +199,26 @@ let uniqueObj = (array:Array<object>, objProperty:string):Array<any> =>{
     return array.filter(function(item, i, arr){ return arr.map(e=>e[objProperty]).indexOf(item[objProperty]) === i});
 }
 
-
+/**
+ * Core Html Element, contruct html element and provide 
+ * basic methods for set and get property and element attribute
+ */
 class CoreElement{
     public node:HTMLElement;
+    /**
+     * Create an Html Element
+     * @param {string} elementName name of element like div, span etc
+     * @param {string} Id element id
+     * @param {string} Class classes assigned to element like in html class attribute format 
+     * @param {string} Style styles assigned to element like in html style attribute format
+     */
     constructor(private elementName:string, protected Id?:string, protected Class?:string, protected Style?:string){
         this.init();
 
     }
-
+    /**
+     * Initialize create and initialize element
+     */
     private init = ()=>{
         try{
             this.node = document.createElement(this.elementName);
@@ -217,17 +229,39 @@ class CoreElement{
         this.setAttr("class", this.Class);
         this.setAttr("style", this.Style);
     }
-
+    /**
+     * Set id of element
+     * @param {string} value id of element
+     * @example
+     * Core.setId('Al12');
+     */
     public setId = (value:string):void=>{
         this.setAttr("id", value);
     }
+    /**
+     * Set class attribute of element like in html class attribute format
+     * @param {string} value string of classes with empty space separator
+     * @example
+     * Core.setClass('first second third');
+     */
     public setClass = (value:string):void=>{
         this.setAttr("class", value);
     }
+    /**
+     * Set style attribute of element like in html style attribute format
+     * @param {string} value string of style with ';' separator 
+     * @example
+     * Core.setStyle('display:block;width:100%');
+     */
     public setStyle = (value:string):void=>{
         this.setAttr("style", value);
     }
-
+    /**
+     * Set id of element with a chainable method
+     * @param {string} value id of element
+     * @example
+     * Core.id('Al12').class('first second');
+     */
     public id = (value:string):this=>{
         if(value){
             this.Id = value;
@@ -235,6 +269,12 @@ class CoreElement{
         }
         return this;
     }
+    /**
+     * Set class of element with a chainable method
+     * @param {string} value string of classes with empty space separator
+     * @example
+     * Core.class('first second').id('Al12');
+     */
     public class = (value:string):this=>{
         if(value){
             this.Class = value;
@@ -242,6 +282,12 @@ class CoreElement{
         }
         return this;
     }
+    /**
+     * Set style of element with a chainable method
+     * @param {string} value string of style with ';' separator
+     * @example
+     * Core.style('display:block;width:100%').class('first second');
+     */    
     public style = (value:string):this=>{
         if(value){
             this.Style = value;
@@ -249,23 +295,42 @@ class CoreElement{
         }
         return this;
     }
-
+    /**
+     * Add a class to element
+     * @param {string} value class name
+     * @example
+     * Core.addClass('bolder');
+     */
     addClass =(value:string):void=>{
         if(value)this.node.classList.add(value);
     }
+    /**
+     * Remove a class by element
+     * @param {string} value class name
+     * @example
+     * Core.removeClass('bolder');
+     */
     removeClass = (value:string):void=>{
         if(value)this.node.classList.remove(value);
     }
+    /**
+     * Add a style rule to element
+     * @param {string} value class name
+     * @example
+     * Core.addStyle('display:none;');
+     */    
     addStyle = (value:string):void=>{
         if(value && this.isValidRule(value))this.addStyleRule(value);
     }
+    /**
+     * Remove a style rule by element
+     * @param {string} value class name
+     * @example
+     * Core.removeStyle('display');
+     */    
     removeStyle = (value:string):void=>{
         if(value)this.removeStyleRule(value);
     }
-
-
-
-
 
     protected setAttr(name:string, value:string){
         if(name!=null && value!=null){

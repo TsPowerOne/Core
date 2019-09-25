@@ -1,6 +1,6 @@
 {
   "name": "@tspower/core",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "description": "Core power tool",
   "main": "./lib/core.js",
   "types": "./lib/core.d.ts",
