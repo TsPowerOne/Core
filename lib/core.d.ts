@@ -106,71 +106,70 @@ declare class CoreElement {
     /**
      * Set id of element
      * @param {string} value id of element
-     * @example
-     *  @Core.setId('Al12');
+     * @example Core.setId('Al12');
      */
     setId: (value: string) => void;
     /**
      * Set class attribute of element like in html class attribute format
      * @param {string} value string of classes with empty space separator
      * @example
-     *  Core.setClass('first second third');
+     * Core.setClass('first second third');
      */
     setClass: (value: string) => void;
     /**
      * Set style attribute of element like in html style attribute format
      * @param {string} value string of style with ';' separator
      * @example
-     *  Core.setStyle('display:block;width:100%');
+     * Core.setStyle('display:block;width:100%');
      */
     setStyle: (value: string) => void;
     /**
      * Set id of element with a chainable method
      * @param {string} value id of element
      * @example
-     *  Core.id('Al12').class('first second');
+     * Core.id('Al12').class('first second');
      */
     id: (value: string) => this;
     /**
      * Set class of element with a chainable method
      * @param {string} value string of classes with empty space separator
      * @example
-     *  Core.class('first second').id('Al12');
+     * Core.class('first second').id('Al12');
      */
     class: (value: string) => this;
     /**
      * Set style of element with a chainable method
      * @param {string} value string of style with ';' separator
      * @example
-     *  Core.style('display:block;width:100%').class('first second');
+     * Core.style('display:block;width:100%').class('first second');
      */
     style: (value: string) => this;
     /**
      * Add a class to element
      * @param {string} value class name
      * @example
-     *  Core.addClass('bolder');
+     * Core.addClass('bolder');
      */
     addClass: (value: string) => void;
     /**
      * Remove a class by element
      * @param {string} value class name
      * @example
-     *  Core.removeClass('bolder');
+     * Core.removeClass('bolder');
      */
     removeClass: (value: string) => void;
     /**
      * Add a style rule to element
      * @param {string} value class name
      * @example
-     *  Core.addStyle('display:none;');
+     * Core.addStyle('display:none;');
      */
     addStyle: (value: string) => void;
     /**
      * Remove a style rule by element
      * @param {string} value class name
      * @example
-     *  Core.removeStyle('display');
+     * Core.removeStyle('display');
      */
     removeStyle: (value: string) => void;
     protected setAttr(name: string, value: string): void;

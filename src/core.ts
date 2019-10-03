@@ -232,8 +232,7 @@ class CoreElement{
     /**
      * Set id of element
      * @param {string} value id of element
-     * @example
-     * Core.setId('Al12');
+     * @example Core.setId('Al12');
      */
     public setId = (value:string):void=>{
         this.setAttr("id", value);

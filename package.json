@@ -1,6 +1,6 @@
 {
   "name": "@tspower/core",
-  "version": "1.16.3",
+  "version": "1.16.4",
   "description": "Core power tool",
   "main": "./lib/core.js",
   "types": "./lib/core.d.ts",
@@ -37,6 +37,7 @@
     "@types/chai": "^4.1.6",
     "@types/mocha": "^5.2.5",
     "chai": "^4.2.0",
+    "jsdom": "^15.1.1",
     "mocha": "^5.2.0",
     "mocha-junit-reporter": "^1.23.1",
     "ts-node": "^8.3.0",
@@ -44,6 +45,8 @@
     "typescript": "^3.6.2"
   },
   "dependencies": {
+    "@types/jsdom": "^12.2.4",
+    "@types/node": "^12.7.9",
     "rxjs": "^6.3.3"
   },
   "bugs": {
